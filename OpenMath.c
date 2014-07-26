@@ -1,6 +1,6 @@
 #include "OpenMath.h"
 
-
+//Generates 90 degrees of a sine table. From there we can calculate 360 degrees of sine and cosine
 TABLES *genTables(TABLES *tab)
 {
 	TABLES *t = malloc(sizeof(*t));
@@ -12,6 +12,8 @@ TABLES *genTables(TABLES *tab)
 	free(t);
 	return tab;
 }
+
+//using the sine table, we return the value of sine at the correct position.
 float getSin(unsigned int val, TABLES *tab)
 {
 	if(val <= 90)
@@ -27,9 +29,10 @@ float getSin(unsigned int val, TABLES *tab)
 	{
 		return -tab->SIN[90-(val-270)];
 	}
-	return sin(val);
+	return sin(val); //if value is out of range, we do a live (slower) sine calculation
 }
 
+//using the sine table, we return cosine by adding 90 degrees from the sine
 float getCos(unsigned int val, TABLES *tab)
 {
 	if(val < 270)
@@ -39,5 +42,5 @@ float getCos(unsigned int val, TABLES *tab)
 	{
 		return getSin(val-270, tab);
 	}
-	return cos(val);
+	return cos(val); //if value is out of range, we do a live (slower) cosine calculation
 }

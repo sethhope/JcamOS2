@@ -2,18 +2,6 @@
 #include "OpenAGL.h"
 bool key[4];
 TABLES *tab;
-int projectedx(int x, int z, int fov){
-	int pro_x;
-	pro_x =  (x * fov / (fov + z) + (84 / 2));
-	return pro_x;
-}
-
-int projectedy(int y, int z, int fov){
-	int pro_y;
-	pro_y = 48 - (y * fov / (fov + z) + (48 / 2));
-	return pro_y;
-
-}
 void drawline3(int x, int y, int z, int x1, int y1, int z1){
 	x = projectedx(x, z, FOV);
 	y = projectedy(y, z, FOV);
